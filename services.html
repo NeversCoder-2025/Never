@@ -1,87 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Services</title>
-  <style>
-    /* NAVBAR */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Services</title>
+
+<style>
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg,#2c3e50,#3498db);
+  color:white;
+}
+
+/* 🔥 GLASS NAVBAR */
 .navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 40px;
-    background:rgba(0,0,0,0.2);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 40px;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:1000;
+
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid rgba(255,255,255,0.2);
 }
 
-.navbar h2{
-    font-size:22px;
+/* LOGO */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.navbar a{
-    text-decoration:none;
-    color:white;
-    margin-left:20px;
-    font-weight:600;
-    transition:0.3s;
+.logo img{
+  width:40px;
 }
 
-.navbar a:hover{
-    color:#facc15;
+.logo h2{
+  font-size:18px;
 }
-    /* Global Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #2c3e50, #3498db);
-      color: #fff;
-      padding: 20px;
-    }
-    /* Container for the table */
-    .table-container {
-      max-width: 800px;
-      margin: 30px auto;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    /* Table Styling */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 0 auto;
-    }
-    thead {
-      background: rgba(0, 0, 0, 0.3);
-    }
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    th {
-      font-size: 1.1rem;
-    }
-    tbody tr:nth-child(even) {
-      background: rgba(255, 255, 255, 0.1);
-    }
-    tbody tr:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-  </style>
+
+/* NAV LINKS */
+.nav-links{
+  display:flex;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:white;
+  margin-left:25px;
+  font-weight:600;
+  position:relative;
+  transition:0.3s;
+}
+
+/* ✨ HOVER EFFECT */
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  bottom:-5px;
+  left:0;
+  background:#facc15;
+  transition:0.3s;
+}
+
+.nav-links a:hover::after{
+  width:100%;
+}
+
+/* ✅ ACTIVE LINK */
+.nav-links a.active{
+  color:#facc15;
+}
+
+.nav-links a.active::after{
+  width:100%;
+}
+
+/* ☰ MENU ICON */
+.menu-toggle{
+  display:none;
+  font-size:28px;
+  cursor:pointer;
+}
+
+/* 📱 MOBILE */
+@media(max-width:768px){
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .nav-links{
+    position:absolute;
+    top:70px;
+    right:0;
+    width:220px;
+    flex-direction:column;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+
+    transform: translateX(100%);
+    transition:0.4s ease;
+  }
+
+  .nav-links a{
+    margin:20px 0;
+    display:block;
+  }
+
+  /* 🔥 SLIDE IN */
+  .nav-links.active{
+    transform: translateX(0);
+  }
+}
+
+/* CONTENT */
+.content{
+  margin-top:100px;
+  padding:20px;
+}
+
+.table-container{
+  max-width:900px;
+  margin:auto;
+  background: rgba(255,255,255,0.1);
+  padding:20px;
+  border-radius:10px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td{
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+tbody tr:hover{
+  background: rgba(255,255,255,0.2);
+}
+
+/* 📱 EXTRA SMALL DEVICES */
+@media(max-width:500px){
+  .logo h2{
+    font-size:14px;
+  }
+}
+</style>
 </head>
+
 <body>
-      <!-- NAVBAR -->
+
+<!-- 🔥 NAVBAR -->
 <div class="navbar">
-    <div class="logo">
-        <img src="images/logo.png" alt="NB Logo">
-        <h2>Nevers Digital World</h2>
-    </div>
+  <div class="logo">
+    <img src="images/logo.png" alt="Logo">
+    <h2>Never's Digital World</h2>
+  </div>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
   <div class="table-container">
     <table>
       <thead>
@@ -97,19 +199,19 @@
         </tr>
         <tr>
           <td>Screen Printing</td>
-          <td>T-shirt printing, tabular printing, car printing &amp; all sports and political shirts</td>
+          <td>T-shirt printing, tabular printing, car printing</td>
         </tr>
         <tr>
           <td>Data Management System</td>
-          <td>Data design, data implementations, data security</td>
+          <td>Data design, implementation, security</td>
         </tr>
         <tr>
           <td>Computer Networking</td>
-          <td>Network design, supply of network devices, building networks, network implementations, network security</td>
+          <td>Network design, devices, installation</td>
         </tr>
         <tr>
           <td>CCTV Installations</td>
-          <td>Installation of CCTV systems, supply of CCTV equipment, implementations of CCTV systems</td>
+          <td>Installation & supply of CCTV systems</td>
         </tr>
         <tr>
           <td>Graphics Designing</td>
@@ -117,22 +219,31 @@
         </tr>
         <tr>
           <td>Web Development</td>
-          <td>Building websites, web hosting</td>
+          <td>Website building & hosting</td>
         </tr>
         <tr>
           <td>Phone Flashing</td>
-          <td>Phone flashing &amp; network unlocking</td>
+          <td>Phone flashing & unlocking</td>
         </tr>
         <tr>
-          <td>ICT Support Services</td>
-          <td>Installing computer systems, software development</td>
+          <td>ICT Support</td>
+          <td>System installation & support</td>
         </tr>
         <tr>
           <td>Hardware</td>
-          <td>Desktop repairing, laptop repairing</td>
+          <td>Computer & laptop repair</td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+
+<!-- JS -->
+<script>
+function toggleMenu(){
+  document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
+
 </body>
 </html>
